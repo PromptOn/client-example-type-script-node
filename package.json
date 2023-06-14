@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@prompton/prompton": "0.0.4",
+    "dotenv": "^16.1.4",
+    "typescript": "^5.1.3"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.3.1"
+  }
+}
