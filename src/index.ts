@@ -46,11 +46,13 @@ async function main() {
     try {
         console.log("Getting an inference for a prompt...");
 
+        // TIP: Pass "mock_me_softly" / "timeout_me_softly" / "fail_me_softly"
+        //      in end_user_id for testing
         let inf_result = await prompton.inferences.newInference({
             promptId: "6489aea62cf0f680e2d56263",
             templateArgs: { what: "young" },
-            endUserId: "ppp",
-            source: "nodeUiExample",
+            endUserId: "ppp", // use
+            source: "Node Client Example",
         });
 
         console.log(`<--- Inference response id: ${inf_result.id}`);
@@ -90,6 +92,7 @@ async function main() {
     //
     // Fetching inference
     //
+    console.log("Fetching inference to get more request details ...");
 
     let inference = await prompton.inferences.getInferenceById(inf_id);
 
@@ -98,7 +101,8 @@ async function main() {
         let inference_error =
             inference.response as PromptonApi.InferenceResponseError;
         console.log(
-            "  Inference with error: " + JSON.stringify(inference_error.error)
+            "  Inference data with error: " +
+                JSON.stringify(inference_error.error)
         );
     } else {
         let inf_data = inference.response as PromptonApi.InferenceResponseData;
