@@ -23,7 +23,7 @@ async function main() {
     }
 
     //
-    // Connecting to Prompton API
+    // Log in to Prompton API
     //
 
     let prompton = new PromptonApiClient({ environment });
@@ -37,6 +37,9 @@ async function main() {
     let token = _token.accessToken;
 
     prompton = new PromptonApiClient({ environment, token });
+
+    let user = await prompton.users.getCurrentUser();
+    console.log(`Loggedin ${user.email} (${user.role})`);
 
     //
     // Posting an inference
