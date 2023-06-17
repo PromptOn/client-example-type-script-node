@@ -14,3 +14,6 @@ compile:
 
 run:
     yarn tsc && yarn node dist/index.js
+
+run2:
+    yarn tsc && yarn node dist/index_oapi_gen.js
