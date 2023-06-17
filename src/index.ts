@@ -12,7 +12,7 @@ import {
 dotenv.config();
 
 async function main() {
-    const environment = process.env.PROMPTON_URL; // https://staging.api.prompton.ai/ or "http://127.0.0.1:8000/" to .env
+    const environment = process.env.PROMPTON_URL; // https://staging.api.prompton.ai or http://127.0.0.1:8000 to .env
     const username = process.env.PROMPTON_USERNAME;
     const password = process.env.PROMPTON_PASSWORD;
 
