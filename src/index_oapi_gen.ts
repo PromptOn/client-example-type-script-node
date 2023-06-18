@@ -48,6 +48,7 @@ async function main() {
         console.log("Getting an inference for a prompt...");
 
         // FIXME: openapi-generator seems not to support polymorphic interfaces
+        //@ts-ignore
         const infReq: promptonApi.Inferencerequest = {
             // you need to your own prompt and a Live prompt version first
             // if you pass promptId it picks one from all the live prompt versions randomly

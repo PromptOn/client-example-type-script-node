@@ -1,13 +1,13 @@
 import dotenv from "dotenv";
 
 // note that import paths and interfaces are going to change soon
-import { PromptonApi, PromptonApiClient } from "@prompton/prompton/prompton";
-import { InferenceResponseData } from "@prompton/prompton/prompton/api/types";
+import { PromptonApi, PromptonApiClient } from "@prompton/prompton-sdk";
+import { InferenceResponseData } from "@prompton/prompton-sdk/prompton/api/types";
 
 import {
     PromptonApiError,
     PromptonApiTimeoutError,
-} from "@prompton/prompton/prompton/errors";
+} from "@prompton/prompton-sdk/prompton/errors";
 
 dotenv.config();
 
@@ -53,13 +53,12 @@ async function main() {
             // you need to your own prompt and a Live prompt version first
             // if you pass promptId it picks one from all the live prompt versions randomly
             //    you can  pass a prompt_version_id instead
-            promptId: "6489aea62cf0f680e2d56263",
-            templateArgs: { what: "a trump fan" },
+            promptId: "64888620f38b7183b2a97896",
+            templateArgs: { what: "happier than you?" },
             endUserId: "node client example user: " + username,
             // endUserId: "mock_me_softly",
             // endUserId: "timeout_me_softly",
             // endUserId: "fail_me_softly",
-            clientRefId: "it should work now on staging ",
         });
 
         console.log(`<--- Inference response id: ${inf_result.id}`);
@@ -77,7 +76,7 @@ async function main() {
             error instanceof PromptonApiError ||
             error instanceof PromptonApiTimeoutError
         ) {
-            // @ts-ignore  TODO: adjust this when Inference post response schema is refactored
+            // @ts-ignore
             inf_id = error.body.detail.inference_id;
             console.log(JSON.stringify(error));
 
@@ -99,37 +98,39 @@ async function main() {
     //
     // Fetching inference
     //
-    console.log("Fetching inference to get more request details ...");
+    if (inf_id) {
+        console.log("Fetching inference to get more request details ...");
 
-    let inference = await prompton.inferences.getInferenceById(inf_id);
+        let inference = await prompton.inferences.getInferenceById(inf_id);
 
-    console.log(`<--- Inference fetch ${inference.id}:`);
-    if (inference.response?.isError) {
-        let inference_error =
-            inference.response as PromptonApi.InferenceResponseError;
-        console.log(
-            "  Inference data with error: " +
-                JSON.stringify(inference_error.error)
-        );
-    } else {
-        let inf_response =
-            inference.response as PromptonApi.InferenceResponseData;
+        console.log(`<--- Inference fetch ${inference.id}:`);
+        if (inference.response?.isError) {
+            let inference_error =
+                inference.response as PromptonApi.InferenceResponseError;
+            console.log(
+                "  Inference data with error: " +
+                    JSON.stringify(inference_error)
+            );
+        } else {
+            let inf_response =
+                inference.response as PromptonApi.InferenceResponseData;
 
-        console.log(
-            `Request:\n${inference.request?.rawRequest.messages
-                .map((message) => {
-                    return ` - ${message.role}: ${message.content}\n`;
-                })
-                .join("")}`
-        );
+            console.log(
+                `Request:\n${inference.request.rawRequest.messages
+                    .map((message) => {
+                        return ` - ${message.role}: ${message.content}\n`;
+                    })
+                    .join("")}`
+            );
 
-        console.log(
-            `Response:\n${inf_response.rawResponse.choices
-                .map((choice, idx) => {
-                    return ` [choice ${idx}] - ${choice.message.role}: ${choice.message.content}\n`;
-                })
-                .join("")}`
-        );
+            console.log(
+                `Response:\n${inf_response.rawResponse.choices
+                    .map((choice, idx) => {
+                        return ` [choice ${idx}] - ${choice.message.role}: ${choice.message.content}\n`;
+                    })
+                    .join("")}`
+            );
+        }
     }
 }
 

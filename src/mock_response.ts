@@ -1,4 +1,4 @@
-import { PromptonApi } from "@prompton/prompton";
+import { PromptonApi } from "@prompton/prompton-sdk";
 
 let inference: PromptonApi.InferenceRead = {
     id: "648a518018a9305eac68b549",
