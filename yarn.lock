@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@prompton/prompton-sdk@0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@prompton/prompton-sdk/-/prompton-sdk-0.0.6.tgz#00cb58bf1355bbf22ec806c25e3e63383ae3a3f9"
-  integrity sha512-GSpoUOjLnzPsix2xxSs8cjthgIM6TtXqnIXHpM5caambSPSNDfd/GEpjdwoKMTtKUIKs1Pzw/9+466vfYQ0GHw==
+"@prompton/prompton-sdk@0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@prompton/prompton-sdk/-/prompton-sdk-0.0.7.tgz#2dbc74f53aaf35267d803f088b936f179ad4bdd8"
+  integrity sha512-jTylFn2caSO3MvSAMaQgu2w7z8alItlmr5fbpFhARU2Anv5mcj7hEG2+TV0utijnzhNMF5pMKb1914MshuYsxg==
   dependencies:
     "@types/url-join" "4.0.1"
     "@ungap/url-search-params" "0.2.2"
